@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = 'myNoteBookjs';  
+
 
 //Create a User using POST "/api/auth". It Doesn't requires authentication (NO LOGIN)
 
@@ -30,22 +35,39 @@ router.post(
         return res
           .status(400)
           .json(
-            "User with this email already exists. Try Using another one..."
+            "User with this email already exists.Try using another one..."
           );
       }
+
+      //Generating salt and hashing the password using bcryptjs
+      const salt = await bcrypt.genSalt(10);
+      const securedPassword = await bcrypt.hash(req.body.password,salt);
+
       //Creating the User
       user = await User.create({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: securedPassword,
         gender: req.body.gender,
         dob: req.body.dob,
       });
 
-      res.json(req.body);
-    } catch (err) {
+      const data = {
+        user : {
+          id : user.id
+        }
+      };
+
+      const authenticationToken = jwt.sign(data,JWT_SECRET);
+
+      res.json({authenticationToken})
+
+      // res.json(req.body);
+
+
+    } catch (error) {
       res.status(500).json("Some Unaccepted Error Occured!");
-      console.err(err.message);
+      console.error(error.message);
     }
 
     // .then(user => res.json(user))
