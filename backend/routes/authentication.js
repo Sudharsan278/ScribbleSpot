@@ -16,7 +16,7 @@ router.post(
   [
     body("name", "Enter a valid name!").isLength({ min: 3 }),
     body("email", "Enter a valid email!").isEmail(),
-    body("password", "Enter a password of min length 5!").isLength({ min: 5 }),
+    body("password", "Password Cannot be blank and it should have a min length of 5!").isLength({ min: 5 }),
     body("gender", "Enter a valid gender!").isLength({ min: 4 }),
     body("dob", "Enter a valid date(YYYY-MM-DD)!").isDate(),
   ],
@@ -66,7 +66,7 @@ router.post(
 
 
     } catch (error) {
-      res.status(500).json("Some Unaccepted Error Occured!");
+      res.status(500).json("Internal Server Error!");
       console.error(error.message);
     }
 
@@ -81,5 +81,54 @@ router.post(
     // console.log(req.body);\
   }
 );
+
+
+//User Login using POST "/api/auth/login". It Doesn't requires authentication (NO LOGIN)
+
+//Setting validators to each of the fields
+router.post(
+  "/login",
+  [
+    body("email", "Enter a valid email!").isEmail(),
+    body("password", "Password Cannot be blank and it should have a min length of 5!").isLength({ min: 5 }),
+  ],
+  async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json('Login With Appropriate Credentials!');
+    }
+
+    const {email, password} = req.body;
+
+    try{
+      const user = await User.findOne({email});
+      if(!user){
+        return res.status(400).json({ error: 'Login With Appropriate Credentials!' });
+      }
+
+      const passwordCompare = await bcrypt.compare(password, user.password);
+
+      if(!passwordCompare){
+        return res.status(400).json({ error: 'Login With Appropriate Credentials!' });
+      }
+
+     
+      const data = {
+        user : {
+          id : user.id
+        }
+      };
+
+      const authenticationToken = jwt.sign(data,JWT_SECRET);
+      res.json({authenticationToken});
+    
+    }catch(err){
+      res.status(500).json("Internal Server Error!");
+      console.error(err.message);
+    }
+
+  })
+
 
 module.exports = router;
