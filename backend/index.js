@@ -7,7 +7,7 @@ const startApp = async () => {
 startApp();
 
 const app = express()
-const port = 3000
+const port = 5000
 
 app.use(express.json());   //To Use the request.body we have to use a middleware (app.use(express.json()))
 
