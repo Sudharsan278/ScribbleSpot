@@ -4,11 +4,12 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchuser = require('../middleware/fetchuser')
 
 const JWT_SECRET = 'myNoteBookjs';  
 
 
-//Create a User using POST "/api/auth". It Doesn't requires authentication (NO LOGIN)
+// Route - 1 => Create a User using POST "/api/auth". It Doesn't requires authentication (NO LOGIN)
 
 //Setting validators to each of the fields
 router.post(
@@ -83,7 +84,7 @@ router.post(
 );
 
 
-//User Login using POST "/api/auth/login". It Doesn't requires authentication (NO LOGIN)
+//Route - 2 =>User Login using POST "/api/auth/login". It Doesn't requires authentication (NO LOGIN)
 
 //Setting validators to each of the fields
 router.post(
@@ -129,6 +130,23 @@ router.post(
     }
 
   })
+
+//Route - 3 =>Getting User Data POST "/api/auth/getuser". requires authentication (LOGIN REQUIRED)
+
+
+router.post( '/getuser',fetchuser, async (req, res) => {
+
+  // Here the fetchuser is a middleware which is used to get the token from the client and verify it
+
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select('-password');    
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({error : 'Internal Server Error!'})
+  }
+})
 
 
 module.exports = router;
