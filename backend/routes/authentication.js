@@ -131,7 +131,7 @@ router.post(
 
   })
 
-//Route - 3 =>Getting User Data POST "/api/auth/getuser". requires authentication (LOGIN REQUIRED)
+//Route - 3 =>Getting User Data POST "/api/auth/getuser". Requires authentication (LOGIN REQUIRED)
 
 
 router.post( '/getuser',fetchuser, async (req, res) => {

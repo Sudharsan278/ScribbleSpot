@@ -14,7 +14,7 @@ app.use(express.json());   //To Use the request.body we have to use a middleware
 app.get('/', (req, res) => {res.send('Hello Krishn!')})
 
 app.use('/api/auth', require('./routes/authentication'));
-app.use('/api/onam', require('./routes/notes'));
+app.use('/api/notes', require('./routes/notes'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
