@@ -22,20 +22,19 @@ router.post(
   "/addnote",
   fetchuser,
   [
-    body('title',  'Enter a valid title').isLength({ min: 5 }),
-    body('description', 'Enter a valid description').isLength({ min: 10 })
+    body("title", "Enter a valid title").isLength({ min: 5 }),
+    body("description", "Enter a valid description").isLength({ min: 10 }),
   ],
   async (req, res) => {
     try {
-
-      //Get the values of from the request body
+      //Get the values from the request body
       const { title, description, tag } = req.body;
 
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
- 
+
       //Creating and inserting the values into a note object
       const note = new Notes({
         title,
@@ -46,7 +45,6 @@ router.post(
       const savedNote = await note.save();
 
       res.json(savedNote);
-
     } catch (error) {
       res.status(500).json("Internal Server Error!");
       console.error(error.message);
@@ -54,37 +52,75 @@ router.post(
   }
 );
 
-
 //Route - 3 => Updating a note "/api/notes/updatenote/:id". Requires authentication (LOGIN REQUIRED)
-router.put('/updatenote/:id', [
-    body('title', 'Enter a valid title').isLength({min : 5}),
-    body('description' ,'Enter a valid description' ).isLength({min : 10})
-],fetchuser, async(req,res) => {
-    
-    //Get the values that are to be updated
-    const {title, description, tag} = req.body;
-    //Creating an empty note object
-    const newNote = {}
+router.put(
+  "/updatenote/:id",
+  [
+    body("title", "Enter a valid title").isLength({ min: 5 }),
+    body("description", "Enter a valid description").isLength({ min: 10 }),
+  ],
+  fetchuser,
+  async (req, res) => {
+    try {
+      //Get the values that are to be updated
+      const { title, description, tag } = req.body;
+      //Creating an empty note object
+      const newNote = {};
 
-    //Storing the updated values into the note object
-    if(title){newNote.title = title};
-    if(description){newNote.description = description};
-    if(tag){newNote.tag = tag};
+      //Storing the updated values into the note object
+      if (title) {
+        newNote.title = title;
+      }
+      if (description) {
+        newNote.description = description;
+      }
+      if (tag) {
+        newNote.tag = tag;
+      }
 
-
-    //Find the note that has to be updated
-    const note = await Notes.findById(req.params.id);
-    if(!note){
+      //Find the note that has to be updated
+      const note = await Notes.findById(req.params.id);
+      if (!note) {
         return res.status(404).send("Not Found1!");
-    }
-    //If the userId doesn't matches do not allow to update 
-    if(note.user.toString()!==req.user.id){
+      }
+      //If the userId doesn't matches do not allow to update
+      if (note.user.toString() !== req.user.id) {
         return res.status(401).send("UnAuthorized Access!");
+      }
+      //Updating the values
+      const updatedNote = await Notes.findByIdAndUpdate(
+        req.params.id,
+        { $set: newNote },
+        { new: true }
+      );
+      res.json(updatedNote);
+    } catch (error) {
+      res.status(500).json("Internal Server Error!");
+      console.error(error.message);
     }
-    //Updating the values 
-    const updatedNote = await Notes.findByIdAndUpdate(req.params.id, {$set : newNote}, {new:true});
-    res.json(updatedNote);
-})
+  }
+);
 
+//Route - 4 => Deleting a specific note using DELETE Request (/api/notes/deletenote/:id). LOGIN REQUIRED
+
+router.delete("/deletenote/:id", fetchuser, async (req, res) => {
+  try {
+    let note = await Notes.findById(req.params.id);
+
+    if (!note) {
+      return res.status(404).json("Not Found");
+    }
+
+    if (req.user.id !== note.user.toString()) {
+      return res.status(401).send("UnAuthorized Access!");
+    }
+
+    note = await Notes.findByIdAndDelete(req.params.id);
+    res.json({ status: "Note Deleted Successfully!", note: note });
+  } catch (error) {
+    res.status(500).json("Internal Server Error!");
+    console.error(error.message);
+  }
+});
 
 module.exports = router;
