@@ -1,13 +1,16 @@
 const connectToMongo = require('./db');
-const express = require('express')
+const express = require('express');
+const cors = require('cors');
+
 
 const startApp = async () => {
-    connectToMongo();
+  connectToMongo();
 }
 startApp();
 
-const app = express()
-const port = 5000
+const app = express();
+app.use(cors());
+const port = 5000;
 
 app.use(express.json());   //To Use the request.body we have to use a middleware (app.use(express.json()))
 
