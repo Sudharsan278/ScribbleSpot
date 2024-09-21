@@ -5,11 +5,12 @@ const AddNote = () => {
   const context = useContext(NoteContext);
   const { addNote } = context;
 
-  const [note, setNote] = useState({title : "", description : "", tag : "default"})
+  const [note, setNote] = useState({title : "", description : "", tag : ""});
   
-  const handleSubmitClick = (event) => {
+  const handleUpdateClick = (event) => {
     event.preventDefault(); 
     addNote(note.title, note.description, note.tag);
+    setNote({title : "", description : "", tag : ""});
   };
 
   const handleChange = (event) => {
@@ -30,6 +31,9 @@ const AddNote = () => {
               className="form-control"
               id="title"
               name="title"
+              minLength={5}
+              required
+              value={note.title}
               aria-describedby="emailHelp"
               onChange={handleChange}
             />
@@ -44,26 +48,33 @@ const AddNote = () => {
               className="form-control"
               id="description"
               name="description"
+              minLength={5}
+              required
+              value={note.description}
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-              
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Check me out
+          <div className="mb-3">
+            <label htmlFor="tag" className="form-label">
+              Tag
             </label>
+            <input
+              type="text"
+              className="form-control"
+              id="tag"
+              name="tag"
+              value={note.tag}
+              onChange={handleChange}
+            />
           </div>
+         
           <button
             type="submit"
             className="btn btn-primary"
-            onClick={handleSubmitClick}
+            onClick={handleUpdateClick}
+            disabled={note.title.length<5 || note.description.length<10}
           >
-            Submit
+            Add a Note
           </button>
         </form>
       </div>

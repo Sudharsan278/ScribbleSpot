@@ -8,6 +8,7 @@ const fetchuser = require('../middleware/fetchuser')
 
 const JWT_SECRET = 'myNoteBookjs';  
 
+//Add success to all the url requests
 
 // Route - 1 => Create a User using POST "/api/auth". It Doesn't requires authentication (NO LOGIN)
 
@@ -95,6 +96,8 @@ router.post(
   ],
   async (req, res) => {
 
+    let success = false;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json('Login With Appropriate Credentials!');
@@ -105,13 +108,13 @@ router.post(
     try{
       const user = await User.findOne({email});
       if(!user){
-        return res.status(400).json({ error: 'Login With Appropriate Credentials!' });
+        return res.status(400).json({ success, error: 'Login With Appropriate Credentials!' });
       }
 
       const passwordCompare = await bcrypt.compare(password, user.password);
 
       if(!passwordCompare){
-        return res.status(400).json({ error: 'Login With Appropriate Credentials!' });
+        return res.status(400).json({ success, error: 'Login With Appropriate Credentials!' });
       }
 
      
@@ -120,9 +123,9 @@ router.post(
           id : user.id
         }
       };
-
+      success = true;
       const authenticationToken = jwt.sign(data,JWT_SECRET);
-      res.json({authenticationToken});
+      res.json({success, authenticationToken});
     
     }catch(err){
       res.status(500).json("Internal Server Error!");
