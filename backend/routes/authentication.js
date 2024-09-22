@@ -101,7 +101,7 @@ router.post(
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json('Login With Appropriate Credentials!');
+      return res.status(400).json({success, error : 'Login With Appropriate Credentials!'});
     }
 
     const {email, password} = req.body;

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertContext from '../context/AlertContext';
 
 const Login = () => {
 
   const [credentials, setCredentials] = useState({email : "" , password : ""})
+  const alertContext = useContext(AlertContext);
+  const showAlert = alertContext.showAlert;
   
   let navigate = useNavigate();
 
@@ -19,8 +22,10 @@ const Login = () => {
     const json = await response.json();
     if(json.success){
       navigate("/");
+      showAlert("Logged in Successfully!", "success");
+
     }else{
-      alert('Login With Valid Credentials!')
+      showAlert(json.error, "danger");
     }
     console.log(json);
   }
@@ -30,16 +35,16 @@ const Login = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='container my-3'>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" className="form-control" value={credentials.email} onChange={handleChange} id="email" name="email" aria-describedby="emailHelp"/>
+          <input type="email" className="form-control" value={credentials.email} onChange={handleChange} id="email" name="email" aria-describedby="emailHelp" required/>
           <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
         </div>
-        <div className="mb-3">
+        <div className="mb-3 my-5">
           <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" value={credentials.password} onChange={handleChange} id="password" name="password"/>
+          <input type="password" className="form-control" value={credentials.password} onChange={handleChange} id="password" name="password" required minLength={5}/>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>

@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertContext from '../context/AlertContext';
+
 const Signup = () => {
+
+  const alertContext = useContext(AlertContext);
+  const {showAlert} = alertContext;
 
   const [credentials, setCredentials] = useState({name:"", email : "", password: "", gender: "", dob: ""});
   const navigate = useNavigate();
@@ -21,12 +26,19 @@ const Signup = () => {
       },
        body : JSON.stringify({name, email, password, gender, dob})
     });
+
+
     const json = await response.json();
+    
     if(json.success){
+
       console.log(json.authenticationToken);
       localStorage.setItem('token', json);
       navigate("/");
+      showAlert("Successfully Signed in!", "success");
+
     }else{
+      showAlert(json.error, "danger");
       console.log(json)
     }
     

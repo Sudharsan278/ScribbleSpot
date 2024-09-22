@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NoteContext from "./NoteContext";
-
+import AlertContext from "../AlertContext";
 
 const NoteState = (props) => {
-
+  
   const host = "http://localhost:5000/api";
-    const notesInitial = [];
+  const notesInitial = [];
+  
+  const alertContext = useContext(AlertContext);
+  const {showAlert} = alertContext;
 
     const getNotes = async () => {
       const response = await fetch(`${host}/notes/getallnotes`, {
@@ -53,6 +56,8 @@ const NoteState = (props) => {
         })
 
         setNotes(newNotes);
+        showAlert("Note Deleted Successfully", "success");
+        
       }
 
       const editNote = async (id,title,description,tag) =>{
