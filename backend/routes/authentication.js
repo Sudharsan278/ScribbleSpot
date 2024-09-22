@@ -26,8 +26,9 @@ router.post(
     //No error => Create User
     //Error => Returning the error message
     const errors = validationResult(req);
+    let success = false;
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
 
     try {
@@ -36,8 +37,8 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json(
-            "User with this email already exists.Try using another one..."
+          .json({success,
+            error : "User with this email already exists.Try using another one..."}
           );
       }
 
@@ -61,14 +62,14 @@ router.post(
       };
 
       const authenticationToken = jwt.sign(data,JWT_SECRET);
-
-      res.json({authenticationToken})
+      success = true;
+      res.json({success, authenticationToken})
 
       // res.json(req.body);
 
 
     } catch (error) {
-      res.status(500).json("Internal Server Error!");
+      res.status(500).json({success,error : "Internal Server Error!"});
       console.error(error.message);
     }
 
