@@ -46,6 +46,7 @@ const Signup = () => {
 
   return (
     <div className='container'>
+      <h1 className='my-4'>Signup to Continue with myNoteBook!</h1>
       <form onSubmit={handleSubmit}>
         
         <div className="mb-3 my-3">

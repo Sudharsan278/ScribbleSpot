@@ -3,12 +3,20 @@ import NoteContext from '../context/notes/NoteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
 import AlertContext from '../context/AlertContext';
+import { useNavigate } from 'react-router-dom';
 
 const Notes = () => {
   const context = useContext(NoteContext);
   const {notes,getNotes, editNote} = context;
+
+  let navigate = useNavigate();
+
   useEffect(()=>{
-    getNotes(); 
+    if(localStorage.getItem('authenticationToken')){
+      getNotes(); 
+    }else{
+      navigate("/login");
+    }
     // eslint-disable-next-line
   },[]);
   
@@ -37,6 +45,8 @@ const Notes = () => {
 
   return (
     <>
+
+      <h1 className='container my-3'>myNoteBook!</h1>
       <AddNote/>
 
       <button type="button "  ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">

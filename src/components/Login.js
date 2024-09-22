@@ -23,6 +23,7 @@ const Login = () => {
     if(json.success){
       navigate("/");
       showAlert("Logged in Successfully!", "success");
+      localStorage.setItem('authenticationToken', json.authenticationToken);
 
     }else{
       showAlert(json.error, "danger");
@@ -36,6 +37,7 @@ const Login = () => {
 
   return (
     <div className='container my-3'>
+      <h1 className='my-4'>Login to Continue with myNoteBook!</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
@@ -46,7 +48,7 @@ const Login = () => {
           <label htmlFor="password" className="form-label">Password</label>
           <input type="password" className="form-control" value={credentials.password} onChange={handleChange} id="password" name="password" required minLength={5}/>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary my-3">Submit</button>
       </form>
     </div>
   )
