@@ -9,6 +9,7 @@ const NoteState = (props) => {
   
   const alertContext = useContext(AlertContext);
   const {showAlert} = alertContext;
+  const [notes,setNotes] = useState(notesInitial);
 
     const getNotes = async () => {
       const response = await fetch(`${host}/notes/getallnotes`, {
@@ -22,7 +23,6 @@ const NoteState = (props) => {
       setNotes(allNotes);
     }
     
-      const [notes,setNotes] = useState(notesInitial);
       
       const addNote = async (title,description,tag ) =>{
       
