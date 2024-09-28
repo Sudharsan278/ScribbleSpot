@@ -97,7 +97,7 @@ const NoteState = (props) => {
 
       const getEntireNote = async(id) => {
         
-        const response = await fetch(`http://localhost:5000/api/notes/getentirenote/${id}`,{
+        const response = await fetch(`${host}/notes/getentirenote/${id}`,{
           method : 'GET',
           headers : {
             'Content-Type' : 'application/json',

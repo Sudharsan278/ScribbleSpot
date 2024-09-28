@@ -123,7 +123,7 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   }
 });
 
-//Route - 5 => Route to display the entire description after clicking the Read More Button(/api/notes/getentirenote/id) [LOGIN REQUIRED]
+//Route - 5 => Route to get the requested note after clicking the Read More Button(/api/notes/getentirenote/id) [LOGIN REQUIRED]
 
 router.get("/getentirenote/:id", fetchuser, async(req,res) => {
   let note;

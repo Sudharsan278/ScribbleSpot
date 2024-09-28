@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import NoteContext from '../context/notes/NoteContext';
 import EntireNote from './EntireNote';
+import Spinner from './Spinner'
 
 const ViewFullNote = () => {
 
@@ -17,20 +18,18 @@ const ViewFullNote = () => {
       try {
         setLoading(true);
         const reqData = await getEntireNote(id);
-        console.log('reqData' , reqData);
         setNote(reqData);
         setLoading(false);
-        console.log('note-2-',note);
+        
       } catch (error) {
         console.error("Failed to fetch note:", error);
       }
     };
     fetchNote(); // eslint-disable-next-line
   }, [id, getEntireNote]);
-  console.log('note 1 - ', note);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   // If no note is found, display an error message
