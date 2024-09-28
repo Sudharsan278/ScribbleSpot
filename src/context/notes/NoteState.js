@@ -95,9 +95,22 @@ const NoteState = (props) => {
         // But to avoid hitting the API frequently we have done in the above manner 
       }
 
+      const getEntireNote = async(id) => {
+        
+        const response = await fetch(`http://localhost:5000/api/notes/getentirenote/${id}`,{
+          method : 'GET',
+          headers : {
+            'Content-Type' : 'application/json',
+            'authentication-token' : localStorage.getItem('authenticationToken')
+          }
+        });
+        const requestedNote = await response.json();
+       
+        return requestedNote;
+      }
 
     return (
-        <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote, getNotes}}>
+        <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote, getNotes, getEntireNote}}>
             {props.children }
         </NoteContext.Provider>
     )

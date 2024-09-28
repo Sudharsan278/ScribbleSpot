@@ -4,6 +4,7 @@ import NoteItem from './NoteItem';
 import AddNote from './AddNote';
 import AlertContext from '../context/AlertContext';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Notes = () => {
   const context = useContext(NoteContext);
@@ -42,22 +43,27 @@ const Notes = () => {
     setNote({...note,[event.target.name] : event.target.value })
   };
 
+    // const dispatch = useDispatch();
+
+    // const {mode} = bindActionCreator(actionCreators,dispatch);
+  
+  const mode = useSelector(state => state.mode);
+  let fontColor = mode==='light' ? 'black': 'white';   
 
   return (
     <>
-
-      <h1 className='container my-3'>myNoteBook!</h1>
+      <h1 className='container my-3' style={{textAlign : 'center', color : fontColor}}>myNoteBook!</h1>
       <AddNote/>
 
-      <button type="button "  ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button "  ref={ref} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" >
         Launch demo modal
       </button>
 
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
+      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style={{backgroundColor : mode==='light'? '#FAF0E6' : '#042743'}}>
+        <div className="modal-dialog" >
+          <div className="modal-content"style={{backgroundColor : mode==='light'? '#FAF0E6' : '#042743'}}>
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Your Note</h1>
+              <h1 className="modal-title fs-5" id="exampleModalLabel" style={{color :fontColor }}>Edit Your Note</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
@@ -67,12 +73,12 @@ const Notes = () => {
         <form className="my-3">
           <div className="mb-3">
             
-            <label htmlFor="etitle" className="form-label">
+            <label htmlFor="etitle" className="form-label" style ={{color : fontColor}}>
               Title
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control input-text-box"
               id="etitle"
               name="etitle"
               value = {note.etitle}
@@ -84,12 +90,12 @@ const Notes = () => {
             
           </div>
           <div className="mb-3">
-            <label htmlFor="edescription" className="form-label">
+            <label htmlFor="edescription" className="form-label" style={{color : fontColor}}>
               Description
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control input-text-box"
               id="edescription"
               name="edescription"
               value = {note.edescription}
@@ -99,12 +105,12 @@ const Notes = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="etag" className="form-label">
+            <label htmlFor="etag" className="form-label" style={{color : fontColor}}>
               Tag
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control input-text-box"
               id="etag"
               name="etag"
               value = {note.etag}
@@ -115,7 +121,7 @@ const Notes = () => {
       
       
       </div>
-            </div>
+      </div>
             <div className="modal-footer">
               <button type="button" ref = {closeRef} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button disabled={note.etitle.length<5 || note.edescription.length<10} type="button" className="btn btn-primary" onClick={handleUpdateClick}>Update changes</button>

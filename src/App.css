@@ -34,3 +34,7 @@
     transform: rotate(360deg);
   }
 }
+
+.input-text-box {
+  border : solid 2px #9A75F5
+}

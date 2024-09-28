@@ -123,4 +123,28 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   }
 });
 
+//Route - 5 => Route to display the entire description after clicking the Read More Button(/api/notes/getentirenote/id) [LOGIN REQUIRED]
+
+router.get("/getentirenote/:id", fetchuser, async(req,res) => {
+  let note;
+  try {
+     note = await Notes.findById(req.params.id);
+
+    if (!note) {
+      return res.status(404).json("Not Found");
+    }
+
+    if (req.user.id !== note.user.toString()) {
+      return res.status(401).send("UnAuthorized Access!");
+    }
+
+    res.json({ status: "Note Fetched Successfully", note: note });
+  } catch (error) {
+    res.status(500).json("Internal Server Error!///");
+    console.error(error.message);
+    console.log(req.note);
+  }
+})
+
+
 module.exports = router;

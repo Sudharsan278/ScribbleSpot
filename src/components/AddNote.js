@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
 import AlertContext from "../context/AlertContext";
+import { useSelector } from "react-redux";
 
 const AddNote = () => {
   const context = useContext(NoteContext);
@@ -22,18 +23,20 @@ const AddNote = () => {
     setNote({...note, [event.target.name] : event.target.value})
   };
 
+  const mode = useSelector(state => state.mode);
+  const fontColor = mode === 'light' ? 'black' : 'white';
   return (
     <div>
       <div className="container my-3">
-        <h2>Add a Note</h2>
+        <h2 style={{color : fontColor}}>Add a Note</h2>
         <form className="my-3">
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">
+            <label htmlFor="title" className="form-label" style={{color : fontColor}}>
               Title
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control input-text-box"
               id="title"
               name="title"
               minLength={5}
@@ -45,12 +48,12 @@ const AddNote = () => {
             
           </div>
           <div className="mb-3">
-            <label htmlFor="description" className="form-label">
+            <label htmlFor="description" className="form-label" style={{color : fontColor}}>
               Description
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control input-text-box "
               id="description"
               name="description"
               minLength={5}
@@ -60,12 +63,12 @@ const AddNote = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="tag" className="form-label">
+            <label htmlFor="tag" className="form-label" style={{color : fontColor}}>
               Tag
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control input-text-box"
               id="tag"
               name="tag"
               value={note.tag}

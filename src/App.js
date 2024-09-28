@@ -10,9 +10,14 @@ import Login from "./components/Login";
 import Signup from "./components/Signup"
 import AlertState from "./context/AlertState";
 import AlertContext from "./context/AlertContext";
+import UserDetails from "./components/UserDetails"
+import ModeChecker from "./components/modeChecker";
+import ViewFullNote from "./components/ViewFullNote";
 
 
 function App() {
+
+  // const mode = useSelector(state => state.mode);
 
 
   return (
@@ -27,6 +32,9 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login/>} />
                   <Route path="/signup" element={<Signup/>} />
+                  <Route path="/getuser" element={<UserDetails/> }/>
+                  <Route path="/hii" element = {<ModeChecker />}/>
+                  <Route path="/getentirenote/:id" element={<ViewFullNote/>}/>
               </Routes>
           </Router>
         </NoteState>

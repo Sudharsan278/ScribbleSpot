@@ -15,3 +15,26 @@ code {
 i{
   cursor: pointer;
 }
+
+.edit-subscript {
+  display: none;
+}
+
+.edit-container:hover .edit-subscript {
+  display: block;
+}
+.edit-container {
+  position: relative;
+  display: inline-block;
+}
+
+.edit-subscript {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: #666;
+  margin-top: 2px;
+}

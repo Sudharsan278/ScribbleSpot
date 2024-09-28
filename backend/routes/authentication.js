@@ -135,10 +135,10 @@ router.post(
 
   })
 
-//Route - 3 =>Getting User Data POST "/api/auth/getuser". Requires authentication (LOGIN REQUIRED)
+//Route - 3 =>Getting User Data GET "/api/auth/getuser". Requires authentication (LOGIN REQUIRED)
 
 
-router.post( '/getuser',fetchuser, async (req, res) => {
+router.get( '/getuser',fetchuser, async (req, res) => {
 
   // Here the fetchuser is a middleware which is used to get the token from the client and verify it
 
