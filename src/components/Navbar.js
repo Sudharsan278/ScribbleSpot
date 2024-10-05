@@ -29,6 +29,7 @@ const Navbar = () => {
   },[])
 
 
+
   return (
     <>
       <nav className={`navbar navbar-expand-lg navbar-${mode==='light'?'#FAF0E6' : 'dark'} bg-${mode==='light'?'#FAF0E6' : 'dark'}`} style={{borderBottomWidth : '1px', borderBottomColor : 'gray', borderBottomStyle : 'solid', backgroundColor : mode==='light' ? '#FAF0E6' : 'dark'}}>

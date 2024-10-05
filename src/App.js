@@ -13,11 +13,11 @@ import AlertContext from "./context/AlertContext";
 import UserDetails from "./components/UserDetails"
 import ModeChecker from "./components/modeChecker";
 import ViewFullNote from "./components/ViewFullNote";
+import LoadingBar from "./components/LoadingBar";
 
 
 function App() {
 
-  // const mode = useSelector(state => state.mode);
 
 
   return (
@@ -26,15 +26,16 @@ function App() {
         <NoteState>
           <Router>
             <Navbar />
+            <LoadingBar/>
             <AlertInvoker/>
               <Routes>
-                <Route path="/about" element={<About />} />
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login/>} />
-                  <Route path="/signup" element={<Signup/>} />
-                  <Route path="/getuser" element={<UserDetails/> }/>
-                  <Route path="/hii" element = {<ModeChecker />}/>
-                  <Route path="/getentirenote/:id" element={<ViewFullNote/>}/>
+                <Route path="/about" element={<About  />} />
+                  <Route path="/" element={<Home  />} />
+                  <Route path="/login" element={<Login />}  />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/getuser" element={<UserDetails /> }/>
+                  <Route path="/hii" element = {<ModeChecker  />}/>
+                  <Route path="/getentirenote/:id" element={<ViewFullNote />}/>
               </Routes>
           </Router>
         </NoteState>

@@ -129,9 +129,9 @@ const EntireNote = (props) => {
     const removeExtraSpacesClick = useCallback((event) => {
 
         event.preventDefault();
-        const cleanDescription = currentDescription.replace(/\s+/g, ' ').trim();
+        const cleanDescription = currentDescription.split(/[  ]+/);
 
-        setCurrentDescription(cleanDescription);
+        setCurrentDescription(cleanDescription.join(" "));
 
         editNote(id, title, cleanDescription, tag)
 
@@ -195,9 +195,9 @@ const EntireNote = (props) => {
             <button className = {`btn btn-${mode==='light' ? 'success' : 'dark'} my-3 mx-1`} onClick = {clearText}>Clear Text</button>
             </div>
             
-            <p>{wordLength !== 0 ? `The no of words in the description is :-  ${wordLength}` : ''}</p>
+            <p style={{color : fontColor}}>{wordLength !== 0 ? `The no of words in the description is :-  ${wordLength}` : ''}</p>
             {loading? <Spinner/> : ''}
-            {summary ?  <><h4>Summary : -</h4><p style={{ fontWeight: 'bold', fontFamily: 'italic', color: mode === 'light' ? 'black' : 'white' }}>{summary}</p></> : <p style={{ fontWeight: 'bold', fontFamily: 'italic', color: mode === 'light' ? 'black' : 'white' }}>Wanna Summarize?</p> }
+            {summary ?  <><h4 className="my-3" style={{color : fontColor}}>Summary : -</h4><p style={{ fontWeight: 'bold', fontFamily: 'italic', color: mode === 'light' ? 'black' : 'white' }}>{summary}</p></> : ""}
             
         </div>
       
