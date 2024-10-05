@@ -49,6 +49,7 @@ const NoteState = (props) => {
             'authentication-token' : localStorage.getItem('authenticationToken')
         }});
 
+        // eslint-disable-next-line
         const deletedNote = await response.json();
 
         const newNotes = notes.filter((note) => {
@@ -71,6 +72,7 @@ const NoteState = (props) => {
           body: JSON.stringify({title,description,tag})
         });
 
+        // eslint-disable-next-line
         const editedNote = await response.json();
         
         
@@ -109,8 +111,84 @@ const NoteState = (props) => {
         return requestedNote;
       }
 
+
+      // const summarizeContent = async (description) => {
+      //   try {
+      //     const response = await fetch(`${host}/notes/summarize`, {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json'
+      //       },
+      //       body: JSON.stringify({text: description})
+      //     });
+          
+      //     if (!response.ok) {
+      //       throw new Error(`HTTP error! status: ${response.status}`);
+      //     }
+          
+      //     const data = await response.json();
+      //     return data;
+      //   } catch (error) {
+      //     console.error('Error in summarizeContent:', error);
+      //     throw error;
+      //   }
+      // };
+
+      const summarizeContent = async(description) => {
+        const apiKey = process.env.REACT_APP_API_KEY;
+        const url = 'https://api.apyhub.com/sharpapi/api/v1/content/summarize';
+        
+        const data = {
+          content: description
+        };
+        
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apy-token': `${apiKey}`
+          },
+          body: JSON.stringify(data)
+        });
+      
+        const finalData = await response.json();
+        if (finalData.data === 'Please upgrade your workspace. Reach out to hello@apyhub.com to unblock your account') {
+          return 'Upgrade API Token!';
+        }
+      
+        const job_id = finalData.job_id;
+      
+        // Polling the job status until it's done
+        const checkJobStatus = async () => {
+          const options = {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'apy-token': `${apiKey}`
+            }
+          };
+      
+          const response = await fetch(`https://api.apyhub.com/sharpapi/api/v1/content/summarize/job/status/${job_id}`, options);
+          const statusData = await response.json();
+      
+          if (statusData.data.attributes.status === 'success') {
+            return statusData.data.attributes.result.summary;
+          } else if (statusData.data.attributes.status === 'error') {
+            return 'An error occurred while summarizing.';
+          } else {
+            // Wait and check again in 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return await checkJobStatus(); // Recursively check again
+          }
+        };
+      
+        return await checkJobStatus();
+      };
+      
+
+
     return (
-        <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote, getNotes, getEntireNote}}>
+        <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote, getNotes, getEntireNote, summarizeContent}}>
             {props.children }
         </NoteContext.Provider>
     )

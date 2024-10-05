@@ -1,11 +1,11 @@
 import AlertContext from "./AlertContext";
-import React, { useState } from 'react'
+import React, { useCallback, useState,useMemo,memo } from 'react'
 
-const AlertState = (props) => {
+const AlertState = memo((props) => {
  
     const [alert,setAlert] = useState({message : "", type : ""});
     
-    const showAlert = (message, type) => {
+    const showAlert = useCallback((message, type) => {
         setAlert({
             message,type
         });
@@ -16,13 +16,14 @@ const AlertState = (props) => {
             })
         },2000);
 
-    }
+    },[]);
 
+   
     return (
-        <AlertContext.Provider value = {{alert ,showAlert}} >
+        <AlertContext.Provider value = {{alert,showAlert}} >
             {props.children}
         </AlertContext.Provider>
     )
-}
+});
 
 export default AlertState

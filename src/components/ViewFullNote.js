@@ -6,6 +6,8 @@ import Spinner from './Spinner'
 
 const ViewFullNote = () => {
 
+  console.log("Rendering the ViewFullNote.js");
+
   const {id} = useParams();
   const {getEntireNote} = useContext(NoteContext);
 
@@ -36,14 +38,18 @@ const ViewFullNote = () => {
   if (!note) {
     return <div>Note not found</div>;
   }
+
+
+  // const MemoizedEntireNote = React.memo(EntireNote);
+
   
   return (
     <>
     <div className="container">
-      <EntireNote id={note.note._id} title={note.note.title} description = {note.note.description} tag = {note.note.tag}/>
+    <EntireNote id={note.note._id} title={note.note.title} description = {note.note.description} tag = {note.note.tag}/>
     </div>
     </>
   );
 }
 
-export default ViewFullNote
+export default ViewFullNote;
