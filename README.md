@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# ScribbleSpot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ScribbleSpot is a web application for making notes that allows users to add, delete, and update their notes with ease. The application also features user authentication and supports both dark and light modes, making it user-friendly and visually appealing.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication**: Secure login and registration for users.
+- **CRUD Operations**: Add, delete, and update notes.
+- **Summarization**: Utilize APIHub's API for content summarization.
+- **Dark and Light Mode**: Easily switch between themes for comfortable viewing.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: 
+  - React (with React Router for routing)
+  - HTML
+  - CSS
+  - Bootstrap
+- **Backend**: 
+  - Express.js
+  - Bcrypt.js (for password hashing)
+  - CORS (for handling cross-origin requests)
+  - Express Validator (for validating user input)
+  - JSON Web Token (JWT) for user authentication
+  - Mongoose (for MongoDB object modeling)
+- **Database**: 
+  - MongoDB
+- **Development**:
+  - Nodemon (for automatic server restarts during development)
+- **APIs**:
+  - APIHub API for content summarization
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+To get a local copy up and running, follow these steps.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js installed on your machine
+- MongoDB installed and running
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Sudharsan278/ScribbleSpot.git
+   cd ScribbleSpot
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+3. Set up your MongoDB connection string in your environment variables or configuration file.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgments
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [Create React App](https://github.com/facebook/create-react-app) for bootstrapping the project.
+- [Bootstrap](https://getbootstrap.com/) for styling components.
+- [APIHub](https://api-hub.com/) for the content summarization API.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+You can learn more about the technologies used in this project:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [React Documentation](https://reactjs.org/)
+- [Express.js Documentation](https://expressjs.com/)
+- [MongoDB Documentation](https://docs.mongodb.com/)
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Feel free to customize the **Other Libraries** section to include any additional libraries you may have used.
+- If you want to elaborate more on how the API from APIHub is used in your project, you can add a brief description in the **Features** section. 
