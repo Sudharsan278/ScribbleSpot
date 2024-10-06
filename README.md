@@ -54,6 +54,8 @@ To get a local copy up and running, follow these steps.
 
 3. Set up your MongoDB connection string in your environment variables or configuration file.
 
+#LICENSE
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 
