@@ -129,9 +129,13 @@ const EntireNote = (props) => {
     const removeExtraSpacesClick = useCallback((event) => {
 
         event.preventDefault();
-        const cleanDescription = currentDescription.split(/[  ]+/);
 
-        setCurrentDescription(cleanDescription.join(" "));
+        const cleanDescription = currentDescription
+        .trim()
+        .split(/\s+/)
+        .join(" ");
+
+        setCurrentDescription(cleanDescription);
 
         editNote(id, title, cleanDescription, tag)
 

@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log(mode);
     const newMode = mode==='light'? 'dark' : 'light';
     dispatch(changeMode(newMode));
   }
@@ -34,7 +33,7 @@ const Navbar = () => {
     <>
       <nav className={`navbar navbar-expand-lg navbar-${mode==='light'?'#FAF0E6' : 'dark'} bg-${mode==='light'?'#FAF0E6' : 'dark'}`} style={{borderBottomWidth : '1px', borderBottomColor : 'gray', borderBottomStyle : 'solid', backgroundColor : mode==='light' ? '#FAF0E6' : 'dark'}}>
   <div className="container-fluid">
-    <Link className="navbar-brand " to="/">Navbar</Link>
+    <Link className="navbar-brand " to="/" style={{fontWeight:'500'}}>ScribbleSpot</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>

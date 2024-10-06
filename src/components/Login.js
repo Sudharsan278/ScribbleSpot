@@ -31,7 +31,7 @@ const Login = () => {
     }else{
       showAlert(json.error, "danger");
     }
-    console.log(json);
+    // console.log(json);
   }
 
   const handleChange = (event) => {

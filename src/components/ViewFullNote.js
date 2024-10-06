@@ -6,8 +6,6 @@ import Spinner from './Spinner'
 
 const ViewFullNote = () => {
 
-  console.log("Rendering the ViewFullNote.js");
-
   const {id} = useParams();
   const {getEntireNote} = useContext(NoteContext);
 

@@ -38,3 +38,36 @@
 .input-text-box {
   border : solid 2px #9A75F5
 }
+
+
+.card-body h5 {
+  font-size: clamp(1rem, 2vw, 1.5rem); /* Adjust title size based on viewport width */
+}
+
+.card-body p {
+  font-size: clamp(0.8rem, 1.5vw, 1rem); /* Adjust text size based on viewport width */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Ensures text does not overflow card */
+  white-space: nowrap;
+}
+
+@media (max-width: 576px) { /* For small screens like mobile */
+  .card-body h5 {
+    font-size: 1.2rem;
+  }
+}
+
+
+.card-about {
+  height: auto; /* Allow the height to adjust based on content */
+  overflow: visible; /* Ensure overflow is visible */
+  padding: 1rem; /* Optional: Add some padding inside the card */
+  margin: 1rem; /* Optional: Add some margin around the card */
+}
+
+/* Optional: Adjust the font size for readability */
+.card-body p {
+  font-size: 0.9rem;
+  line-height: 1.5; /* Set a comfortable line height for readability */
+  margin-bottom: 0; /* Remove bottom margin to avoid extra spacing */
+}

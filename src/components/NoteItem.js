@@ -1,12 +1,17 @@
 import React, { useContext } from "react";
 import NoteContext from "../context/notes/NoteContext";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const NoteItem = (props) => {
   const context = useContext(NoteContext);
   const {deleteNote} = context;
   const { note, updateNote} = props;
+
+  const mode = useSelector(state => state.mode);
+  const fontColor = mode === 'light'? 'black' : 'white';
+  const cardBgColor = mode === 'light' ? 'white' : 'lightgrey';
   
   const limitDescription = (description) => {
     return description.length > 70 ? description.slice(0,70) + '...' : description;
@@ -22,7 +27,7 @@ const NoteItem = (props) => {
   return (
     <>
     <div className=" col-md-3 ">
-      <div className="card my-3" >
+      <div className="card my-3" style={{backgroundColor : cardBgColor}}>
         <div className="card-body" style={{height : '100px'}}>
           <h5 className="card-title">{note.title}</h5>
           <p className="card-text">{limitDescription(note.description)}</p>
@@ -38,8 +43,8 @@ const NoteItem = (props) => {
               onClick={() => { updateNote(note); }}
             ></i>
           </div>
-          {/* Read More button */}
-          <button className="btn btn-primary" onClick={() => {handleClick(note._id)}}>Read More</button>
+         
+          <button className='btn btn-primary' onClick={() => {handleClick(note._id)}}>Read More</button>
           
         </div>
       </div>

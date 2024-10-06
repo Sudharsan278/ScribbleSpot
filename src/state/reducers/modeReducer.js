@@ -7,7 +7,6 @@ export const modeReducer = createSlice({
     initialState,
     reducers : {
         changeMode : (state, action) => {
-            console.log(action.payload);
             state = action.payload;
             document.body.style.backgroundColor = state==='light' ? '#FAF0E6' : '#042743';
             return action.payload;

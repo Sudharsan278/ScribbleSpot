@@ -22,18 +22,15 @@ const About = () => {
         </p>
       </section>
 
-
-      <div className="card mb-4">
-        <div className="card-body">
-          <h2 className="card-title my-3"><FaUser /> Who Am I?</h2>
-          <p className="card-text">
-          I am a passionate developer dedicated to creating intuitive and user-friendly web applications. With a focus on enhancing user experience, I strive to build solutions that are both functional and aesthetically pleasing. As the sole developer of this project, I handle everything from front-end design to back-end functionality, ensuring that every aspect of the application aligns with my vision of simplicity and efficiency. My goal is to empower users with tools that streamline their daily tasks, making their lives easier and more organized.
-          </p>
-        </div>
-      </div>
-
-
-
+    <div className="card mb-4" style={{padding : '10px'}}>      
+      <h2 className="card-title my-3">
+        <FaUser /> Who Am I?
+      </h2>
+      <p className="card-text" style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
+        I am a passionate developer dedicated to creating intuitive and user-friendly web applications. With a focus on enhancing user experience, I strive to build solutions that are both functional and aesthetically pleasing. As the sole developer of this project, I handle everything from front-end design to back-end functionality, ensuring that every aspect of the application aligns with my vision of simplicity and efficiency. My goal is to empower users with tools that streamline their daily tasks, making their lives easier and more organized.
+      </p>
+    </div>
+    
       <div className="container mt-5">
       <h1 className="text-center mb-4">About This Project</h1>
 
@@ -78,7 +75,7 @@ const About = () => {
             </h2>
             <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div className="accordion-body">
-                <strong>Summarization</strong> This feature allows users to efficiently condense lengthy notes into concise summaries, highlighting the essential information and key points. By leveraging advanced algorithms, the system analyzes the content to extract relevant details, ensuring that users can quickly grasp the main ideas without having to read through entire notes. This functionality enhances productivity by enabling users to manage their information more effectively.
+                <strong>Summarization</strong> This feature allows users to efficiently condense lengthy notes into concise summaries, highlighting the essential information and key points. With the Help of apyhub I have used the api of Text Summarizer api to summarize the user's note ensuring that users can quickly grasp the main ideas without having to read through the entire note. This functionality enhances productivity by enabling users to manage their information more effectively.
               </div>
             </div>
           </div>

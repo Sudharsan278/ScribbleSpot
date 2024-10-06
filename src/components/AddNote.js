@@ -24,7 +24,9 @@ const AddNote = () => {
   };
 
   const mode = useSelector(state => state.mode);
-  const fontColor = mode === 'light' ? 'black' : 'white';
+  const fontColor = mode === 'light'? 'black' : 'white';
+  const cardBgColor = mode === 'light' ? 'white' : 'lightgrey';
+
   return (
     <div>
       <div className="container my-3">
@@ -78,9 +80,10 @@ const AddNote = () => {
          
           <button
             type="submit"
-            className="btn btn-primary"
+            className={`btn btn-primary`}
             onClick={handleUpdateClick}
             disabled={note.title.length<5 || note.description.length<10}
+           
           >
             Add a Note
           </button>
