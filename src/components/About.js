@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUser, FaTools, FaRocket, FaGithub, FaEnvelope, FaReact, FaNode, FaDatabase, FaHtml5, FaCss3Alt, FaJsSquare, FaBootstrap, FaServer, FaMailBulk } from 'react-icons/fa';
+import { FaUser, FaTools, FaRocket, FaGithub, FaEnvelope, FaReact, FaDatabase, FaHtml5, FaCss3Alt, FaJsSquare, FaBootstrap, FaServer, FaMailBulk } from 'react-icons/fa';
 import { useSelector } from "react-redux";
 
 
@@ -135,14 +135,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-4 mb-3">
-              <div className="card text-center">
-                <div className="card-body">
-                  <FaNode size={50} className="mb-2" />
-                  <h5 className="card-title">Node.js</h5>
-                </div>
-              </div>
-            </div>
+            
             <div className="col-md-4 mb-3">
               <div className="card text-center">
                 <div className="card-body">
