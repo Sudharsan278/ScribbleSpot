@@ -34,7 +34,6 @@ function App() {
                   <Route path="/login" element={<Login />}  />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/getuser" element={<UserDetails /> }/>
-                  <Route path="/hii" element = {<ModeChecker  />}/>
                   <Route path="/getentirenote/:id" element={<ViewFullNote />}/>
               </Routes>
           </Router>
